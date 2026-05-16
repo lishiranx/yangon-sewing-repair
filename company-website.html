@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仰光精工缝纫设备 | ရန်ကုန် Jinggong အပ်ချုပ်စက်</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪡</text></svg>">
+<style>
+  :root {
+    --green-900: #064e3b;
+    --green-800: #065f46;
+    --green-700: #047857;
+    --green-600: #059669;
+    --green-500: #10b981;
+    --green-100: #d1fae5;
+    --green-50: #ecfdf5;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
+    --radius: 12px;
+
+    --header-h: 64px;
+    --max-w: 1100px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ---- Navigation ---- */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-h);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    transition: box-shadow 0.2s;
+  }
+  .navbar.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .nav-logo .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--green-600);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .nav-logo .logo-text {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .nav-logo .logo-text small {
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-links a {
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--green-50); color: var(--green-700); }
+
+  .lang-switch {
+    margin-left: 8px;
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .lang-switch button {
+    padding: 6px 12px;
+    border: none;
+    background: var(--card);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+  }
+  .lang-switch button.active {
+    background: var(--green-600);
+    color: white;
+  }
+  .lang-switch button:not(:last-child) { border-right: 1px solid var(--border); }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text);
+    padding: 4px;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    margin-top: var(--header-h);
+    background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+    color: white;
+    padding: 100px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--bg);
+    clip-path: ellipse(70% 100% at 50% 100%);
+  }
+  .hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 8px; }
+  .hero h1 .my { font-weight: 400; font-size: 24px; display: block; margin-top: 4px; opacity: 0.9; }
+  .hero p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero p .my { display: block; font-size: 15px; margin-top: 4px; opacity: 0.8; }
+  .hero-cta {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-cta a {
+    display: inline-block;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .hero-cta .btn-primary {
+    background: white;
+    color: var(--green-700);
+  }
+  .hero-cta .btn-primary:hover { background: var(--green-50); transform: translateY(-2px); }
+  .hero-cta .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+  .hero-cta .btn-outline:hover { border-color: white; transform: translateY(-2px); }
+
+  /* ---- Sections ---- */
+  section { padding: 72px 20px; }
+  .section-inner { max-width: var(--max-w); margin: 0 auto; }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-title h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .section-title .my {
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .section-title p {
+    color: var(--text-secondary);
+    margin-top: 8px;
+  }
+
+  /* ---- About ---- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .about-img {
+    background: var(--green-100);
+    border-radius: var(--radius);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: var(--green-600);
+  }
+  .about-text h3 { font-size: 22px; margin-bottom: 16px; }
+  .about-text p { color: var(--text-secondary); margin-bottom: 12px; }
+  .about-text .my { font-size: 14px; opacity: 0.85; }
+
+  /* ---- Services ---- */
+  #services { background: var(--card); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+  }
+  .service-card:hover {
+    border-color: var(--green-500);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(5,150,105,0.10);
+  }
+  .service-card .icon {
+    width: 64px;
+    height: 64px;
+    background: var(--green-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 16px;
+  }
+  .service-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .service-card p { font-size: 14px; color: var(--text-secondary); }
+  .service-card .my { font-size: 13px; color: var(--text-secondary); margin-top: 6px; display: block; }
+
+  /* ---- Contact ---- */
+  #contact { background: var(--green-900); color: white; }
+  #contact .section-title h2 { color: white; }
+  #contact .section-title .my, #contact .section-title p { color: rgba(255,255,255,0.7); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .contact-item .ci-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .contact-item .ci-label {
+    font-size: 12px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .contact-item .ci-value {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .contact-item .ci-value.my {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+
+  .contact-map {
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+  .contact-map .map-icon { font-size: 36px; }
+
+  .contact-cta {
+    margin-top: 8px;
+  }
+  .contact-cta a {
+    display: inline-block;
+    padding: 14px 36px;
+    background: white;
+    color: var(--green-900);
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-cta a:hover { background: var(--green-50); }
+
+  /* ---- Knowledge Base Link ---- */
+  #knowledge-link {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--green-50);
+  }
+  #knowledge-link h2 { font-size: 26px; margin-bottom: 12px; }
+  #knowledge-link .my { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; display: block; }
+  #knowledge-link a {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--green-600);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  #knowledge-link a:hover { background: var(--green-700); transform: translateY(-2px); }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 13px;
+  }
+
+  /* ---- Language toggling ---- */
+  .zh, .my-lang { transition: opacity 0.2s; }
+  .lang-my .zh { display: none; }
+  .lang-my .my-lang { display: inline; }
+  .lang-zh .my-lang { display: none; }
+  .lang-zh .zh { display: inline; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: var(--card);
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .hero h1 { font-size: 28px; }
+    .hero h1 .my { font-size: 18px; }
+    .hero p { font-size: 15px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .section-title h2 { font-size: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 72px 16px 60px; }
+    section { padding: 48px 16px; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .fade-in { animation: fadeUp 0.6s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">精</div>
+    <div class="logo-text">
+      仰光精工缝纫
+      <small class="my-lang">ရန်ကုန် Jinggong အပ်ချုပ်စက်</small>
+      <small class="zh">Yangon Jinggong Sewing Machine</small>
+    </div>
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#about" class="zh">关于</a>
+    <a href="#about" class="my-lang">အကြောင်း</a>
+    <a href="#services" class="zh">服务</a>
+    <a href="#services" class="my-lang">ဝန်ဆောင်မှု</a>
+    <a href="#contact" class="zh">联系</a>
+    <a href="#contact" class="my-lang">ဆက်သွယ်</a>
+    <a href="index.html" class="zh">知识库</a>
+    <a href="index.html" class="my-lang">ဗဟုသုတ</a>
+    <div class="lang-switch">
+      <button onclick="switchLang('zh')" id="langZh" class="active">中文</button>
+      <button onclick="switchLang('my')" id="langMy">မြန်မာ</button>
+    </div>
+  </div>
+
+  <button class="mobile-menu-btn" onclick="toggleMobile()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="fade-in">
+    <h1>
+      <span class="zh">仰光精工缝纫设备</span>
+      <span class="my-lang">ရန်ကုန် Jinggong အပ်ချုပ်စက်</span>
+      <span class="my my-lang" style="display:none">— ယုံကြည်စိတ်ချရသော စက်မှုအပ်ချုပ်စက် ဝန်ဆောင်မှု</span>
+    </h1>
+    <p>
+      <span class="zh">莱达雅工业区 · 专业工业缝纫机维修与服务</span>
+      <span class="my-lang">လှိုင်သာယာစက်မှုဇုန် · စက်မှုအပ်ချုပ်စက် ပြုပြင်ခြင်းနှင့် ဝန်ဆောင်မှု</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">
+        <span class="zh">联系我们</span>
+        <span class="my-lang">ဆက်သွယ်ရန်</span>
+      </a>
+      <a href="#services" class="btn-outline">
+        <span class="zh">查看服务</span>
+        <span class="my-lang">ဝန်ဆောင်မှုများ</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">关于我们</span>
+        <span class="my-lang">ကျွန်ုပ်တို့အကြောင်း</span>
+      </h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-img">🪡</div>
+      <div class="about-text">
+        <h3>
+          <span class="zh">仰光莱达雅工业区 · 您的缝纫设备管家</span>
+          <span class="my-lang">လှိုင်သာယာ စက်မှုဇုန် · သင်၏ အပ်ချုပ်စက် မိတ်ဆွေ</span>
+        </h3>
+        <p class="zh">
+          仰光精工缝纫设备位于仰光莱达雅工业区，专注于工业缝纫机的维修、配件销售、二手设备买卖及安装调试。我们拥有多年维修经验，熟悉杰克、美机、富山、中捷、宝石等主流品牌，为缅南地区服装工厂提供快速、可靠的设备服务。
+        </p>
+        <p class="my-lang">
+          ရန်ကုန် Jinggong အပ်ချုပ်စက်သည် လှိုင်သာယာစက်မှုဇုန်တွင် တည်ရှိပြီး စက်မှုအပ်ချုပ်စက်များ ပြုပြင်ခြင်း၊ အပိုပစ္စည်းရောင်းချခြင်း၊ တစ်ခါသုံးစက်များ ရောင်းဝယ်ခြင်းနှင့် တပ်ဆင်ခြင်းတို့ကို အဓိကထား ဆောင်ရွက်ပါသည်။ ကျွန်ုပ်တို့သည် Jack, MAQI, HIKARI, Zoje, Gemsy စသော နာမည်ကြီးအမှတ်တံဆိပ်များကို ကျွမ်းကျင်စွာ ပြုပြင်နိုင်ပြီး မြန်မာနိုင်ငံအောက်ပိုင်းရှိ အထည်ချုပ်စက်ရုံများအား လျင်မြန်သော ဝန်ဆောင်မှုကို ပေးအပ်ပါသည်။
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">服务项目</span>
+        <span class="my-lang">ဝန်ဆောင်မှုများ</span>
+      </h2>
+      <p class="zh">覆盖您工厂设备全生命周期需求</p>
+      <p class="my-lang">သင့်စက်ရုံ၏ စက်ကိရိယာ လိုအပ်ချက်အားလုံးအတွက်</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🔧</div>
+        <h3>
+          <span class="zh">缝纫机维修</span>
+          <span class="my-lang">အပ်ချုပ်စက် ပြုပြင်ခြင်း</span>
+        </h3>
+        <p class="zh">
+          各类工业平缝机、包缝机、绷缝机、特种机故障排查与维修。擅长沙田故障诊断、电控系统维修、旋梭调试等。
+        </p>
+        <span class="my-lang">
+          စက်မှုအပ်ချုပ်စက်များ၊ အနားသတ်စက်များ၊ ထိုးစက်များနှင့် အထူးစက်များ၏ ချို့ယွင်းချက်ရှာဖွေခြင်းနှင့် ပြုပြင်ခြင်း။ လျှပ်စစ်ထိန်းချုပ်စနစ်၊ လည်ချော်ယန္တား ပြုပြင်ခြင်းတို့တွင် ကျွမ်းကျင်ပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">⚙️</div>
+        <h3>
+          <span class="zh">配件销售</span>
+          <span class="my-lang">အပိုပစ္စည်း အရောင်း</span>
+        </h3>
+        <p class="zh">
+          提供机针、旋梭、梭壳、皮带、压脚、电控板等原厂及兼容配件，常用易损件现货供应。
+        </p>
+        <span class="my-lang">
+          အပ်၊ လည်ချော်၊ ထိုးခွေ၊ ခါးပတ်၊ ဖိဖိနှင့် လျှပ်စစ်ထိန်းချုပ်ဘုတ် အပါအဝင် မူရင်းနှင့် အံဝင်ခွင်ကျ အပိုပစ္စည်းများ ရောင်းချပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">🔄</div>
+        <h3>
+          <span class="zh">二手设备买卖</span>
+          <span class="my-lang">တစ်ခါသုံးစက် ရောင်း/ဝယ်</span>
+        </h3>
+        <p class="zh">
+          二手工业缝纫机收购与销售，经专业检修后出售，提供短期质保，性价比之选。
+        </p>
+        <span class="my-lang">
+          တစ်ခါသုံးစက်မှုအပ်ချုပ်စက်များ ဝယ်ယူခြင်းနှင့် ရောင်းချခြင်း။ ကျွမ်းကျင်စွာ ပြုပြင်ပြီးမှ ရောင်းချကာ အာမခံချက်ပေးပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">📐</div>
+        <h3>
+          <span class="zh">安装调试与保养</span>
+          <span class="my-lang">တပ်ဆင်ခြင်းနှင့် ထိန်းသိမ်းခြင်း</span>
+        </h3>
+        <p class="zh">
+          新机安装、精度校准、操作培训及定期上门保养服务，延长设备寿命，减少停机时间。
+        </p>
+        <span class="my-lang">
+          စက်အသစ်တပ်ဆင်ခြင်း၊ တိကျမှုချိန်ညှိခြင်း၊ လေ့ကျင့်ပေးခြင်းနှင့် ပုံမှန်ပြုပြင်ထိန်းသိမ်းခြင်း ဝန်ဆောင်မှုများ။
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Knowledge Base Link -->
+<section id="knowledge-link">
+  <div class="section-inner">
+    <h2>
+      <span class="zh">维修知识库</span>
+      <span class="my-lang">ပြုပြင်ရေး ဗဟုသုတ</span>
+    </h2>
+    <span class="my-lang" style="display:none">စက်ပြုပြင်ရေးအတွက် အသုံးဝင်သော အချက်အလက်များ စုစည်းမှု — အမှားကုဒ်များ၊ ပြုပြင်နည်းများ၊ ချိန်ညှိနည်းများ</span>
+    <p class="zh">
+      整理了涵盖杰克、美机、富山等品牌的常见故障代码、维修步骤、调试方法和保养指南。点击查看完整知识库。
+    </p>
+    <a href="index.html">
+      <span class="zh">进入知识库 →</span>
+      <span class="my-lang">ဗဟုသုတသို့ သွားရန် →</span>
+    </a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">联系我们</span>
+        <span class="my-lang">ဆက်သွယ်ရန်</span>
+      </h2>
+      <p class="zh">随时为您服务</p>
+      <p class="my-lang">မည်သည့်အချိန်တွင်မဆို ဆက်သွယ်နိုင်ပါသည်</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">
+              <span class="zh">电话</span>
+              <span class="my-lang">ဖုန်း</span>
+            </div>
+            <div class="ci-value" style="color:white">09 781155666 / 099799300488</div>
+            <div class="ci-value my-lang" style="display:none;color:rgba(255,255,255,0.7);font-size:14px">09 781155666 / 099799300488</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">💬</div>
+          <div>
+            <div class="ci-label">WeChat</div>
+            <div class="ci-value" style="color:white">li0085592862346</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">👤</div>
+          <div>
+            <div class="ci-label">Facebook</div>
+            <div class="ci-value" style="color:white">@YangonJinggongSewing</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">
+              <span class="zh">地址</span>
+              <span class="my-lang">လိပ်စာ</span>
+            </div>
+            <div class="ci-value" style="color:white">
+              <span class="zh">仰光省 · 莱达雅工业区</span>
+              <span class="my-lang">ရန်ကုန်တိုင်း · လှိုင်သာယာစက်မှုဇုန်</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-cta">
+          <a href="tel:+959781155666">
+            <span class="zh">📞 立即致电</span>
+            <span class="my-lang">📞 ချက်ချင်းခေါ်ဆိုရန်</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-map">
+        <div class="map-icon">🗺️</div>
+        <span class="zh">莱达雅工业区 · 地图</span>
+        <span class="my-lang" style="display:none">လှိုင်သာယာစက်မှုဇုန် · မြေပုံ</span>
+        <span style="font-size:12px;opacity:0.6" class="zh">（可添加 Google Maps 嵌入）</span>
+        <span style="font-size:12px;opacity:0.6;display:none" class="my-lang">Google Maps ထည့်သွင်းနိုင်သည်</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 仰光精工缝纫设备 | ရန်ကုန် Jinggong အပ်ချုပ်စက်</p>
+  <p style="margin-top:4px;font-size:12px">
+    <span class="zh">莱达雅工业区 · 缅甸仰光</span>
+    <span class="my-lang">လှိုင်သာယာစက်မှုဇုန် · ရန်ကုန်၊ မြန်မာ</span>
+  </p>
+</footer>
+
+<script>
+function switchLang(lang) {
+  document.body.classList.remove('lang-zh', 'lang-my');
+  document.body.classList.add('lang-' + lang);
+  document.getElementById('langZh').classList.toggle('active', lang === 'zh');
+  document.getElementById('langMy').classList.toggle('active', lang === 'my');
+  localStorage.setItem('siteLang', lang);
+
+  /* In Burmese mode, hide hero secondary my line since it's shown inline */
+  const heroMy = document.querySelector('.hero .my');
+  if (heroMy) heroMy.style.display = lang === 'my' ? 'block' : 'none';
+}
+
+function toggleMobile() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+/* Navbar scroll effect */
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* Load saved language */
+(function() {
+  const saved = localStorage.getItem('siteLang') || 'zh';
+  switchLang(saved);
+  /* Ensure correct initial display of hero my element */
+  const heroMy = document.querySelector('.hero .my');
+  if (heroMy) heroMy.style.display = saved === 'my' ? 'block' : 'none';
+})();
+
+/* Close mobile nav on link click */
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+</script>
+
+</body>
+</html>
