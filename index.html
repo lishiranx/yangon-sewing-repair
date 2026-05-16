@@ -3,1141 +3,699 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>工业缝纫机维修知识库</title>
+<title>仰光精工缝纫设备 | ရန်ကုန် Jinggong အပ်ချုပ်စက်</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪡</text></svg>">
 <style>
   :root {
-    --bg: #f5f6fa;
+    --green-900: #064e3b;
+    --green-800: #065f46;
+    --green-700: #047857;
+    --green-600: #059669;
+    --green-500: #10b981;
+    --green-100: #d1fae5;
+    --green-50: #ecfdf5;
+    --bg: #f9fafb;
     --card: #ffffff;
-    --primary: #2563eb;
-    --primary-light: #dbeafe;
-    --text: #1e293b;
-    --text-secondary: #64748b;
-    --border: #e2e8f0;
-    --tag-bg: #eff6ff;
-    --tag-text: #1d4ed8;
-    --success: #059669;
-    --warning: #d97706;
+    --text: #1f2937;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
     --radius: 12px;
+
+    --header-h: 64px;
+    --max-w: 1100px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    line-height: 1.6;
   }
 
-  .header {
-    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
-    color: white;
-    padding: 32px 20px 40px;
-    text-align: center;
-  }
-  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
-  .header p { font-size: 14px; opacity: 0.85; }
-
-  .container { max-width: 960px; margin: -20px auto 40px; padding: 0 16px; }
-
-  .search-box {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .search-bar {
-    position: relative;
-    margin-bottom: 16px;
-  }
-  .search-bar input {
-    width: 100%;
-    padding: 12px 16px 12px 44px;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .search-bar input:focus { border-color: var(--primary); }
-  .search-bar .icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    font-size: 18px;
-  }
-  .search-bar .clear-btn {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 18px;
-    cursor: pointer;
-    display: none;
-    padding: 4px;
-  }
-  .search-bar .clear-btn.show { display: block; }
-
-  .stats {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 10px;
-  }
-
-  .filters {
+  /* ---- Navigation ---- */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-h);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .filter-btn {
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1.5px solid var(--border);
-    background: var(--card);
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
-    color: var(--text-secondary);
-  }
-  .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
-  .filter-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-  }
-
-  .brand-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 12px 0 4px;
-  }
-  .brand-btn {
-    padding: 4px 12px;
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s;
-    color: var(--text-secondary);
-  }
-  .brand-btn:hover { border-color: var(--tag-text); color: var(--tag-text); }
-  .brand-btn.active {
-    background: var(--tag-bg);
-    color: var(--tag-text);
-    border-color: var(--tag-text);
-  }
-
-  .results { margin-top: 16px; }
-
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
     transition: box-shadow 0.2s;
   }
-  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.10); }
+  .navbar.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
 
-  .card-header {
-    padding: 16px 20px;
-    cursor: pointer;
+  .nav-logo {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    user-select: none;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
   }
-  .card-header h2 {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.4;
-    flex: 1;
-  }
-  .card-header .expand-icon {
-    font-size: 14px;
-    color: var(--text-secondary);
-    transition: transform 0.2s;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .card.open .expand-icon { transform: rotate(180deg); }
-
-  .card-body {
-    padding: 0 20px 20px;
-    display: none;
-  }
-  .card.open .card-body { display: block; }
-
-  .meta-row {
+  .nav-logo .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--green-600);
+    border-radius: 8px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 12px;
-  }
-  .meta-tag {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    background: var(--tag-bg);
-    color: var(--tag-text);
-  }
-  .meta-tag.brand {
-    background: #fef3c7;
-    color: #92400e;
-  }
-
-  .section-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin: 16px 0 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .symptom-list, .cause-list {
-    list-style: none;
-    padding: 0;
-  }
-  .symptom-list li, .cause-list li {
-    position: relative;
-    padding: 4px 0 4px 20px;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .symptom-list li::before {
-    content: "!";
-    position: absolute;
-    left: 0;
-    color: var(--warning);
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
     font-weight: 700;
   }
-  .cause-list li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--primary);
+  .nav-logo .logo-text {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .nav-logo .logo-text small {
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: block;
   }
 
-  .step-list { counter-reset: step; list-style: none; padding: 0; }
-  .step-list li {
-    counter-increment: step;
-    position: relative;
-    padding: 6px 0 6px 32px;
-    font-size: 14px;
-    line-height: 1.6;
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
-  .step-list li::before {
-    content: counter(step);
+  .nav-links a {
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--green-50); color: var(--green-700); }
+
+  .lang-switch {
+    margin-left: 8px;
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .lang-switch button {
+    padding: 6px 12px;
+    border: none;
+    background: var(--card);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+  }
+  .lang-switch button.active {
+    background: var(--green-600);
+    color: white;
+  }
+  .lang-switch button:not(:last-child) { border-right: 1px solid var(--border); }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text);
+    padding: 4px;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    margin-top: var(--header-h);
+    background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+    color: white;
+    padding: 100px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
     position: absolute;
+    bottom: -2px;
     left: 0;
-    top: 6px;
-    width: 22px;
-    height: 22px;
-    background: var(--primary-light);
-    color: var(--primary);
+    right: 0;
+    height: 60px;
+    background: var(--bg);
+    clip-path: ellipse(70% 100% at 50% 100%);
+  }
+  .hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 8px; }
+  .hero h1 .my { font-weight: 400; font-size: 24px; display: block; margin-top: 4px; opacity: 0.9; }
+  .hero p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero p .my { display: block; font-size: 15px; margin-top: 4px; opacity: 0.8; }
+  .hero-cta {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-cta a {
+    display: inline-block;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .hero-cta .btn-primary {
+    background: white;
+    color: var(--green-700);
+  }
+  .hero-cta .btn-primary:hover { background: var(--green-50); transform: translateY(-2px); }
+  .hero-cta .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+  .hero-cta .btn-outline:hover { border-color: white; transform: translateY(-2px); }
+
+  /* ---- Sections ---- */
+  section { padding: 72px 20px; }
+  .section-inner { max-width: var(--max-w); margin: 0 auto; }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-title h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .section-title .my {
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .section-title p {
+    color: var(--text-secondary);
+    margin-top: 8px;
+  }
+
+  /* ---- About ---- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .about-img {
+    background: var(--green-100);
+    border-radius: var(--radius);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: var(--green-600);
+  }
+  .about-text h3 { font-size: 22px; margin-bottom: 16px; }
+  .about-text p { color: var(--text-secondary); margin-bottom: 12px; }
+  .about-text .my { font-size: 14px; opacity: 0.85; }
+
+  /* ---- Services ---- */
+  #services { background: var(--card); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+  }
+  .service-card:hover {
+    border-color: var(--green-500);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(5,150,105,0.10);
+  }
+  .service-card .icon {
+    width: 64px;
+    height: 64px;
+    background: var(--green-100);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 16px;
+  }
+  .service-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .service-card p { font-size: 14px; color: var(--text-secondary); }
+  .service-card .my { font-size: 13px; color: var(--text-secondary); margin-top: 6px; display: block; }
+
+  /* ---- Contact ---- */
+  #contact { background: var(--green-900); color: white; }
+  #contact .section-title h2 { color: white; }
+  #contact .section-title .my, #contact .section-title p { color: rgba(255,255,255,0.7); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .contact-item .ci-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .contact-item .ci-label {
     font-size: 12px;
-    font-weight: 600;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-
-  .tips-box {
-    background: #fefce8;
-    border-left: 4px solid var(--warning);
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-top: 12px;
+  .contact-item .ci-value {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .contact-item .ci-value.my {
     font-size: 14px;
-    line-height: 1.6;
-  }
-  .tips-box .label {
-    font-weight: 600;
-    color: var(--warning);
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
   }
 
-  .code-table {
-    width: 100%;
-    border-collapse: collapse;
+  .contact-map {
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+  .contact-map .map-icon { font-size: 36px; }
+
+  .contact-cta {
     margin-top: 8px;
-    font-size: 14px;
   }
-  .code-table th {
-    background: #f8fafc;
-    text-align: left;
-    padding: 8px 12px;
-    border-bottom: 2px solid var(--border);
+  .contact-cta a {
+    display: inline-block;
+    padding: 14px 36px;
+    background: white;
+    color: var(--green-900);
+    border-radius: 8px;
     font-weight: 600;
-    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
   }
-  .code-table td {
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-  .code-table tr:last-child td { border-bottom: none; }
+  .contact-cta a:hover { background: var(--green-50); }
 
-  .empty-state {
+  /* ---- Knowledge Base Link ---- */
+  #knowledge-link {
     text-align: center;
     padding: 60px 20px;
-    color: var(--text-secondary);
+    background: var(--green-50);
   }
-  .empty-state .big-icon { font-size: 48px; margin-bottom: 12px; }
-  .empty-state p { font-size: 15px; }
+  #knowledge-link h2 { font-size: 26px; margin-bottom: 12px; }
+  #knowledge-link .my { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; display: block; }
+  #knowledge-link a {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--green-600);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  #knowledge-link a:hover { background: var(--green-700); transform: translateY(-2px); }
 
-  .loading {
+  /* ---- Footer ---- */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.5);
     text-align: center;
-    padding: 60px;
-    color: var(--text-secondary);
-  }
-  .loading .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--border);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 12px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .highlight { background: #fde68a; padding: 0 2px; }
-
-  @media (max-width: 640px) {
-    .header { padding: 24px 16px 32px; }
-    .header h1 { font-size: 22px; }
-    .card-header { padding: 14px 16px; }
-    .card-body { padding: 0 16px 16px; }
-    .card-header h2 { font-size: 15px; }
-    .code-table { font-size: 13px; }
-    .code-table th, .code-table td { padding: 6px 8px; }
+    padding: 32px 20px;
+    font-size: 13px;
   }
 
-  .print-only { display: none; }
-  @media print {
-    .search-box, .filters, .brand-filters, .stats { display: none; }
-    .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
-    .card-header { cursor: default; }
-    .card-body { display: block !important; }
-    .expand-icon { display: none; }
-    .header { background: #1e3a5f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .tips-box, .step-list li::before, .meta-tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* ---- Language toggling ---- */
+  .zh, .my-lang { transition: opacity 0.2s; }
+  .lang-my .zh { display: none; }
+  .lang-my .my-lang { display: inline; }
+  .lang-zh .my-lang { display: none; }
+  .lang-zh .zh { display: inline; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: var(--card);
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .hero h1 { font-size: 28px; }
+    .hero h1 .my { font-size: 18px; }
+    .hero p { font-size: 15px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .section-title h2 { font-size: 24px; }
   }
+
+  @media (max-width: 480px) {
+    .hero { padding: 72px 16px 60px; }
+    section { padding: 48px 16px; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .fade-in { animation: fadeUp 0.6s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>工业缝纫机维修知识库</h1>
-  <p>缅甸仰光 · 莱达雅工业区 · 涵盖杰克 / 美机 / 富山 / 中捷等主流品牌</p>
-</div>
-
-<div class="container">
-  <div class="search-box">
-    <div class="search-bar">
-      <span class="icon">&#128269;</span>
-      <input type="text" id="searchInput" placeholder="搜索故障现象、品牌、代码…" autocomplete="off">
-      <button class="clear-btn" id="clearBtn">&times;</button>
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">精</div>
+    <div class="logo-text">
+      仰光精工缝纫
+      <small class="my-lang">ရန်ကုန် Jinggong အပ်ချုပ်စက်</small>
+      <small class="zh">Yangon Jinggong Sewing Machine</small>
     </div>
+  </a>
 
-    <div class="filters" id="categoryFilters"></div>
-
-    <div class="brand-filters" id="brandFilters"></div>
-
-    <div class="stats" id="stats">共 <span id="totalCount">0</span> 条记录</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about" class="zh">关于</a>
+    <a href="#about" class="my-lang">အကြောင်း</a>
+    <a href="#services" class="zh">服务</a>
+    <a href="#services" class="my-lang">ဝန်ဆောင်မှု</a>
+    <a href="#contact" class="zh">联系</a>
+    <a href="#contact" class="my-lang">ဆက်သွယ်</a>
+    <a href="knowledge-base.html" class="zh">知识库</a>
+    <a href="knowledge-base.html" class="my-lang">ဗဟုသုတ</a>
+    <div class="lang-switch">
+      <button onclick="switchLang('zh')" id="langZh" class="active">中文</button>
+      <button onclick="switchLang('my')" id="langMy">မြန်မာ</button>
+    </div>
   </div>
 
-  <div class="results" id="results">
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <p>正在加载知识库…</p>
+  <button class="mobile-menu-btn" onclick="toggleMobile()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="fade-in">
+    <h1>
+      <span class="zh">仰光精工缝纫设备</span>
+      <span class="my-lang">ရန်ကုန် Jinggong အပ်ချုပ်စက်</span>
+      <span class="my my-lang" style="display:none">— ယုံကြည်စိတ်ချရသော စက်မှုအပ်ချုပ်စက် ဝန်ဆောင်မှု</span>
+    </h1>
+    <p>
+      <span class="zh">莱达雅工业区 · 专业工业缝纫机维修与服务</span>
+      <span class="my-lang">လှိုင်သာယာစက်မှုဇုန် · စက်မှုအပ်ချုပ်စက် ပြုပြင်ခြင်းနှင့် ဝန်ဆောင်မှု</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">
+        <span class="zh">联系我们</span>
+        <span class="my-lang">ဆက်သွယ်ရန်</span>
+      </a>
+      <a href="#services" class="btn-outline">
+        <span class="zh">查看服务</span>
+        <span class="my-lang">ဝန်ဆောင်မှုများ</span>
+      </a>
     </div>
   </div>
-</div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">关于我们</span>
+        <span class="my-lang">ကျွန်ုပ်တို့အကြောင်း</span>
+      </h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-img">🪡</div>
+      <div class="about-text">
+        <h3>
+          <span class="zh">仰光莱达雅工业区 · 您的缝纫设备管家</span>
+          <span class="my-lang">လှိုင်သာယာ စက်မှုဇုန် · သင်၏ အပ်ချုပ်စက် မိတ်ဆွေ</span>
+        </h3>
+        <p class="zh">
+          仰光精工缝纫设备位于仰光莱达雅工业区，专注于工业缝纫机的维修、配件销售、二手设备买卖及安装调试。我们拥有多年维修经验，熟悉杰克、美机、富山、中捷、宝石等主流品牌，为缅南地区服装工厂提供快速、可靠的设备服务。
+        </p>
+        <p class="my-lang">
+          ရန်ကုန် Jinggong အပ်ချုပ်စက်သည် လှိုင်သာယာစက်မှုဇုန်တွင် တည်ရှိပြီး စက်မှုအပ်ချုပ်စက်များ ပြုပြင်ခြင်း၊ အပိုပစ္စည်းရောင်းချခြင်း၊ တစ်ခါသုံးစက်များ ရောင်းဝယ်ခြင်းနှင့် တပ်ဆင်ခြင်းတို့ကို အဓိကထား ဆောင်ရွက်ပါသည်။ ကျွန်ုပ်တို့သည် Jack, MAQI, HIKARI, Zoje, Gemsy စသော နာမည်ကြီးအမှတ်တံဆိပ်များကို ကျွမ်းကျင်စွာ ပြုပြင်နိုင်ပြီး မြန်မာနိုင်ငံအောက်ပိုင်းရှိ အထည်ချုပ်စက်ရုံများအား လျင်မြန်သော ဝန်ဆောင်မှုကို ပေးအပ်ပါသည်။
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">服务项目</span>
+        <span class="my-lang">ဝန်ဆောင်မှုများ</span>
+      </h2>
+      <p class="zh">覆盖您工厂设备全生命周期需求</p>
+      <p class="my-lang">သင့်စက်ရုံ၏ စက်ကိရိယာ လိုအပ်ချက်အားလုံးအတွက်</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🔧</div>
+        <h3>
+          <span class="zh">缝纫机维修</span>
+          <span class="my-lang">အပ်ချုပ်စက် ပြုပြင်ခြင်း</span>
+        </h3>
+        <p class="zh">
+          各类工业平缝机、包缝机、绷缝机、特种机故障排查与维修。擅长沙田故障诊断、电控系统维修、旋梭调试等。
+        </p>
+        <span class="my-lang">
+          စက်မှုအပ်ချုပ်စက်များ၊ အနားသတ်စက်များ၊ ထိုးစက်များနှင့် အထူးစက်များ၏ ချို့ယွင်းချက်ရှာဖွေခြင်းနှင့် ပြုပြင်ခြင်း။ လျှပ်စစ်ထိန်းချုပ်စနစ်၊ လည်ချော်ယန္တား ပြုပြင်ခြင်းတို့တွင် ကျွမ်းကျင်ပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">⚙️</div>
+        <h3>
+          <span class="zh">配件销售</span>
+          <span class="my-lang">အပိုပစ္စည်း အရောင်း</span>
+        </h3>
+        <p class="zh">
+          提供机针、旋梭、梭壳、皮带、压脚、电控板等原厂及兼容配件，常用易损件现货供应。
+        </p>
+        <span class="my-lang">
+          အပ်၊ လည်ချော်၊ ထိုးခွေ၊ ခါးပတ်၊ ဖိဖိနှင့် လျှပ်စစ်ထိန်းချုပ်ဘုတ် အပါအဝင် မူရင်းနှင့် အံဝင်ခွင်ကျ အပိုပစ္စည်းများ ရောင်းချပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">🔄</div>
+        <h3>
+          <span class="zh">二手设备买卖</span>
+          <span class="my-lang">တစ်ခါသုံးစက် ရောင်း/ဝယ်</span>
+        </h3>
+        <p class="zh">
+          二手工业缝纫机收购与销售，经专业检修后出售，提供短期质保，性价比之选。
+        </p>
+        <span class="my-lang">
+          တစ်ခါသုံးစက်မှုအပ်ချုပ်စက်များ ဝယ်ယူခြင်းနှင့် ရောင်းချခြင်း။ ကျွမ်းကျင်စွာ ပြုပြင်ပြီးမှ ရောင်းချကာ အာမခံချက်ပေးပါသည်။
+        </span>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">📐</div>
+        <h3>
+          <span class="zh">安装调试与保养</span>
+          <span class="my-lang">တပ်ဆင်ခြင်းနှင့် ထိန်းသိမ်းခြင်း</span>
+        </h3>
+        <p class="zh">
+          新机安装、精度校准、操作培训及定期上门保养服务，延长设备寿命，减少停机时间。
+        </p>
+        <span class="my-lang">
+          စက်အသစ်တပ်ဆင်ခြင်း၊ တိကျမှုချိန်ညှိခြင်း၊ လေ့ကျင့်ပေးခြင်းနှင့် ပုံမှန်ပြုပြင်ထိန်းသိမ်းခြင်း ဝန်ဆောင်မှုများ။
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Knowledge Base Link -->
+<section id="knowledge-link">
+  <div class="section-inner">
+    <h2>
+      <span class="zh">维修知识库</span>
+      <span class="my-lang">ပြုပြင်ရေး ဗဟုသုတ</span>
+    </h2>
+    <span class="my-lang" style="display:none">စက်ပြုပြင်ရေးအတွက် အသုံးဝင်သော အချက်အလက်များ စုစည်းမှု — အမှားကုဒ်များ၊ ပြုပြင်နည်းများ၊ ချိန်ညှိနည်းများ</span>
+    <p class="zh">
+      整理了涵盖杰克、美机、富山等品牌的常见故障代码、维修步骤、调试方法和保养指南。点击查看完整知识库。
+    </p>
+    <a href="knowledge-base.html">
+      <span class="zh">进入知识库 →</span>
+      <span class="my-lang">ဗဟုသုတသို့ သွားရန် →</span>
+    </a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>
+        <span class="zh">联系我们</span>
+        <span class="my-lang">ဆက်သွယ်ရန်</span>
+      </h2>
+      <p class="zh">随时为您服务</p>
+      <p class="my-lang">မည်သည့်အချိန်တွင်မဆို ဆက်သွယ်နိုင်ပါသည်</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">
+              <span class="zh">电话</span>
+              <span class="my-lang">ဖုန်း</span>
+            </div>
+            <div class="ci-value" style="color:white">09 781155666 / 099799300488</div>
+            <div class="ci-value my-lang" style="display:none;color:rgba(255,255,255,0.7);font-size:14px">09 781155666 / 099799300488</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">💬</div>
+          <div>
+            <div class="ci-label">WeChat</div>
+            <div class="ci-value" style="color:white">li0085592862346</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">👤</div>
+          <div>
+            <div class="ci-label">Facebook</div>
+            <div class="ci-value" style="color:white">@YangonJinggongSewing</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">
+              <span class="zh">地址</span>
+              <span class="my-lang">လိပ်စာ</span>
+            </div>
+            <div class="ci-value" style="color:white">
+              <span class="zh">仰光省 · 莱达雅工业区</span>
+              <span class="my-lang">ရန်ကုန်တိုင်း · လှိုင်သာယာစက်မှုဇုန်</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-cta">
+          <a href="tel:+959781155666">
+            <span class="zh">📞 立即致电</span>
+            <span class="my-lang">📞 ချက်ချင်းခေါ်ဆိုရန်</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-map">
+        <div class="map-icon">🗺️</div>
+        <span class="zh">莱达雅工业区 · 地图</span>
+        <span class="my-lang" style="display:none">လှိုင်သာယာစက်မှုဇုန် · မြေပုံ</span>
+        <span style="font-size:12px;opacity:0.6" class="zh">（可添加 Google Maps 嵌入）</span>
+        <span style="font-size:12px;opacity:0.6;display:none" class="my-lang">Google Maps ထည့်သွင်းနိုင်သည်</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 仰光精工缝纫设备 | ရန်ကုန် Jinggong အပ်ချုပ်စက်</p>
+  <p style="margin-top:4px;font-size:12px">
+    <span class="zh">莱达雅工业区 · 缅甸仰光</span>
+    <span class="my-lang">လှိုင်သာယာစက်မှုဇုန် · ရန်ကုန်၊ မြန်မာ</span>
+  </p>
+</footer>
 
 <script>
-const embeddedData = [
-  {
-    "id": "duanxian_mianxian",
-    "category": "常见故障排除",
-    "title": "面线断线故障处理",
-    "brands": ["通用"],
-    "symptoms": ["缝纫过程中面线频繁断裂", "缝线无法形成完整线迹"],
-    "causes": ["面线张力过大", "夹线器有异物或毛刺", "机针安装不当", "针眼有毛刺", "旋梭毛刺", "穿线路径错误", "面线质量差"],
-    "steps": [
-      "检查穿线路径是否正确，按说明书重新穿线",
-      "清理夹线器，检查有无线头卡住",
-      "检查机针：针尖是否弯曲、针眼是否光滑，必要时更换新针",
-      "检查旋梭周围有无毛刺，用细砂纸打磨光滑",
-      "调松面线张力旋钮（逆时针），逐档测试",
-      "更换面线试试，排除线质量问题"
-    ],
-    "tips": "断线后先检查最简单的穿线路径，90%的断线问题出在穿线错误。",
-    "tags": ["断线", "面线", "通用", "平缝机"]
-  },
-  {
-    "id": "duanxian_dixian",
-    "category": "常见故障排除",
-    "title": "底线断线故障处理",
-    "brands": ["通用"],
-    "symptoms": ["底线频繁断裂", "梭芯线用完前断线"],
-    "causes": ["底线张力过大", "梭芯安装不当", "梭壳有毛刺或损伤", "梭芯变形", "底线质量差"],
-    "steps": [
-      "取出梭壳，检查梭芯是否安装正确，梭芯应顺时钟方向装入",
-      "调节梭壳上的小螺丝，逆时针调松底线张力",
-      "检查梭壳和梭芯有无变形或毛刺",
-      "更换底线试试不同品牌线",
-      "检查旋梭定位钩与梭架凹口间隙是否约0.5mm"
-    ],
-    "tags": ["断线", "底线", "通用", "梭芯", "梭壳"]
-  },
-  {
-    "id": "tiaozhen",
-    "category": "常见故障排除",
-    "title": "跳针（跳线）故障处理",
-    "brands": ["通用"],
-    "symptoms": ["线迹不连续，针距中有跳过的针脚", "布料上有间隔性空白"],
-    "causes": ["机针弯曲或变钝", "机针型号不对（过细或过粗）", "针杆高度不正确", "旋梭与机针配合时间不对", "旋梭尖磨损", "缝料厚薄变化未调整"],
-    "steps": [
-      "更换新机针，确认型号与布料匹配",
-      "检查针杆高度：针杆降至最低时，梭尖距机针中心3.5-4mm",
-      "针杆回升2.2mm时，梭尖应到达机针中心，距针孔上缘1.2-1.5mm",
-      "检查旋梭尖是否磨损变钝，必要时更换旋梭",
-      "调整旋梭时间配合：松开旋梭齿轮，微调勾线时间",
-      "测试不同转速下的缝纫效果，低速调整后再高速测试"
-    ],
-    "tips": "旋梭尖磨损是跳针最常见的原因，检查时用放大镜观察梭尖是否有金属光泽。",
-    "tags": ["跳针", "跳线", "通用", "旋梭", "平缝机"]
-  },
-  {
-    "id": "duanzhen",
-    "category": "常见故障排除",
-    "title": "断针故障处理",
-    "brands": ["通用"],
-    "symptoms": ["缝纫时机针折断", "机针撞击压脚或针板"],
-    "causes": ["机针太细不适合当前布料", "机针弯曲后继续使用", "压脚松动或位置不正", "针板孔对位不准", "送布与机针不同步", "操作者拉扯布料过猛"],
-    "steps": [
-      "根据布料厚度更换合适号数的机针",
-      "拧紧压脚螺钉，确认压脚位置正确",
-      "检查针板孔是否对正，必要时更换针板",
-      "检查机针与旋梭同步关系",
-      "操作时让送布牙自然送布，不要强行拉扯布料"
-    ],
-    "tags": ["断针", "通用", "机针"]
-  },
-  {
-    "id": "fengliao_qizhou",
-    "category": "常见故障排除",
-    "title": "缝料起皱故障处理",
-    "brands": ["通用"],
-    "symptoms": ["缝制后布料边缘起皱", "线迹不平整"],
-    "causes": ["面线或底线张力过大", "送布牙高度不当", "压脚压力过大", "机针太粗", "差动送料调整不当"],
-    "steps": [
-      "适当调松面线和底线张力",
-      "降低压脚压力：旋松压脚调压螺钉",
-      "检查送布牙高度：机针尖端到针板面时，送布牙尖与针板面高低一致",
-      "换更细的机针",
-      "薄料时减小差动比"
-    ],
-    "tags": ["起皱", "缝料", "通用", "薄料"]
-  },
-  {
-    "id": "fengliao_kenpo",
-    "category": "常见故障排除",
-    "title": "缝料被啃破（齿痕）",
-    "brands": ["通用"],
-    "symptoms": ["布料表面被送布牙啃出齿痕"],
-    "causes": ["送布牙齿尖太锐利", "压脚压力太大", "送布牙露出针板太高"],
-    "steps": [
-      "用油石或细砂纸修磨送布牙齿尖，使其圆滑",
-      "旋松压脚调压螺钉，减小压脚压力",
-      "调低送布牙露出针板的高度",
-      "薄料时使用塑料压脚或特氟龙压脚"
-    ],
-    "tags": ["齿痕", "啃破", "通用", "送布牙"]
-  },
-  {
-    "id": "kadun",
-    "category": "常见故障排除",
-    "title": "机器卡顿/运转不顺畅",
-    "brands": ["通用"],
-    "symptoms": ["手轮转动费力", "机器运转时有异响", "电机负载大"],
-    "causes": ["长期未保养润滑不足", "旋梭内积有线头碎布", "送布机构有异物", "轴承磨损", "皮带过紧"],
-    "steps": [
-      "切断电源，手动转动手轮感受阻力",
-      "拆下旋梭清理内部线头碎屑",
-      "给各加油孔滴入缝纫机油后空转2-3分钟",
-      "检查送布机构有无异物卡住",
-      "检查皮带松紧度",
-      "如轴承磨损严重需更换"
-    ],
-    "tags": ["卡顿", "异响", "通用", "保养"]
-  },
-  {
-    "id": "jack_e_series",
-    "category": "故障代码",
-    "title": "杰克(JACK) E系列故障代码",
-    "brands": ["杰克", "JACK"],
-    "symptoms": ["面板显示E代码", "机器停止工作"],
-    "items": [
-      {"code": "E01/E1", "meaning": "主轴电机堵转/电机过热", "solution": "停机冷却，检查飞轮定位，检修电机"},
-      {"code": "E02/E2", "meaning": "主轴电机软件过流", "solution": "检查电源连接是否牢固，排查附近过热物品"},
-      {"code": "E03/E3", "meaning": "操作面板与控制器通讯异常", "solution": "检查通讯线路连接，重新插拔线束"},
-      {"code": "E04/E4", "meaning": "主轴电机霍尔故障/信号异常", "solution": "检查霍尔传感器线路或更换传感器"},
-      {"code": "E05/E5", "meaning": "主轴电机停机信号异常", "solution": "检查定位霍尔信号，联系专业人员检修"},
-      {"code": "E09/E9", "meaning": "脚踏板连接异常/信号异常", "solution": "检查脚踏板插头及连接线"},
-      {"code": "E10", "meaning": "硬件过流", "solution": "断电重启，检查电机负载"},
-      {"code": "E11/E12", "meaning": "系统过压或欠压", "solution": "检查电源电压是否稳定"},
-      {"code": "E13", "meaning": "放电回路信号异常", "solution": "控制系统检测到异常，需专业检测放电回路"},
-      {"code": "E19", "meaning": "电流检测回路故障", "solution": "检查电流检测板及连接线"},
-      {"code": "E31-E36", "meaning": "抬压脚电机过流/编码器故障/步进电机堵转", "solution": "检查对应步进电机及编码器线路"}
-    ],
-    "tags": ["杰克", "JACK", "故障代码", "E系列"]
-  },
-  {
-    "id": "jack_communication",
-    "category": "故障代码",
-    "title": "杰克(JACK) 通讯类故障代码",
-    "brands": ["杰克", "JACK"],
-    "symptoms": ["面板显示E21-E26代码", "多轴无法正常工作"],
-    "items": [
-      {"code": "E21", "meaning": "针杆电控通讯异常", "solution": "检查针杆控制板通讯线路或更换伺服卡"},
-      {"code": "E22", "meaning": "压脚电控通讯异常", "solution": "检查压脚控制板通讯线路或更换伺服卡"},
-      {"code": "E23", "meaning": "线切割器通讯异常", "solution": "检查线切割器控制板通讯线路"},
-      {"code": "E24", "meaning": "行驶电机通讯异常", "solution": "检查行驶电机控制板通讯线路"},
-      {"code": "E25", "meaning": "绕线电机通讯异常", "solution": "检查绕线电机控制板通讯线路"},
-      {"code": "E26", "meaning": "钩座电机通讯异常", "solution": "检查钩座电机控制板通讯线路"}
-    ],
-    "tags": ["杰克", "JACK", "故障代码", "通讯故障"]
-  },
-  {
-    "id": "jack_menjin",
-    "category": "故障代码",
-    "title": "杰克(JACK) 门襟机专用代码",
-    "brands": ["杰克", "JACK"],
-    "symptoms": ["门襟机显示数字代码", "无法正常运行程序"],
-    "items": [
-      {"code": "01", "meaning": "缝纫运行程序为空", "solution": "重新写入或选择运行程序"},
-      {"code": "02", "meaning": "缝纫程序没有确定", "solution": "确认并保存缝纫程序"},
-      {"code": "03", "meaning": "机头原点位置错误", "solution": "重新归零或调整机头原点"}
-    ],
-    "tags": ["杰克", "JACK", "门襟机", "专用代码"]
-  },
-  {
-    "id": "jack_code08",
-    "category": "故障代码",
-    "title": "杰克(JACK) 代码08故障",
-    "brands": ["杰克", "JACK"],
-    "symptoms": ["显示代码08", "旋梭卡住"],
-    "steps": [
-      "尝试强行倒转手轮恢复",
-      "若手轮可转动但仍有问题，可能是编码器或电控系统故障",
-      "联系厂家维修"
-    ],
-    "tags": ["杰克", "JACK", "代码08"]
-  },
-  {
-    "id": "fushan_error_codes",
-    "category": "故障代码",
-    "title": "富山(HIKARI) 故障代码",
-    "brands": ["富山", "HIKARI"],
-    "symptoms": ["面板显示E代码"],
-    "items": [
-      {"code": "E17", "meaning": "电机皮带/传感器故障", "solution": "检查电机皮带，断裂直接更换；电机/传感器故障建议联系售后"},
-      {"code": "E24", "meaning": "电源/控制线异常（8800A机型）", "solution": "断电重启冷却；检查电源线与控制线是否牢固；打开机头和线圈盖检查有无堵塞或碎屑"},
-      {"code": "E211/E212", "meaning": "电控系统故障", "solution": "需专业诊断，参考富山E211-212故障诊断教程"},
-      {"code": "E402", "meaning": "平缝机故障", "solution": "参考富山E402平缝机故障诊断教程"},
-      {"code": "E605", "meaning": "平缝机故障", "solution": "参考富山E605平缝机故障排查教程"}
-    ],
-    "tags": ["富山", "HIKARI", "故障代码"]
-  },
-  {
-    "id": "fushan_common",
-    "category": "常见故障排除",
-    "title": "富山(HIKARI) 常见机械故障",
-    "brands": ["富山", "HIKARI"],
-    "symptoms": ["留线头太短", "往后不断线", "震动大", "渗油"],
-    "items": [
-      {
-        "fault": "留线头太短",
-        "causes": ["穿线通道不顺畅", "线卡在导纱器或夹线器缝隙中", "线张力不均匀"],
-        "solution": "检查穿线路径，调整夹线器压力，确认导纱器间隙正常"
-      },
-      {
-        "fault": "往后不断线",
-        "causes": ["针不光滑", "针细线粗不进导线槽", "上线过紧", "梭子内有纤维绒"],
-        "solution": "换新针；换合适粗细的针线组合；调松机头前部调节螺丝；清理梭子周围绒毛"
-      },
-      {
-        "fault": "震动大/渗油",
-        "causes": ["安装不水平", "油封老化", "内部螺丝松动"],
-        "solution": "检查机器是否放平；检查油封；拧紧各部位螺丝"
-      }
-    ],
-    "tags": ["富山", "HIKARI", "常见故障"]
-  },
-  {
-    "id": "maqi_common",
-    "category": "常见故障排除",
-    "title": "美机(MAQI) 常见故障",
-    "brands": ["美机", "MAQI"],
-    "symptoms": ["运行异常", "断线"],
-    "tips": "美机故障代码体系与杰克相似，E系列代码可参考杰克E系列处理。机械结构与通用工业平缝机相同，适用通用故障排查方法。",
-    "steps": [
-      "故障代码出现时先断电重启",
-      "参照杰克E系列代码含义排查",
-      "机械故障参照通用平缝机处理方法",
-      "建议收集具体故障代码后联系美机售后获取精确指导"
-    ],
-    "tags": ["美机", "MAQI", "常见故障"]
-  },
-  {
-    "id": "xuanxiao_adjust",
-    "category": "机械调试",
-    "title": "旋梭调整（核心调试）",
-    "brands": ["通用"],
-    "steps": [
-      "确认前提：机针安装正确，平面靠右、凹面靠左，针插到顶",
-      "转动手轮使机针降到最低点",
-      "此时旋梭梭尖距机针中心应为3.5-4mm",
-      "缓慢转动手轮使针杆回升2.2mm",
-      "此时梭尖应到达机针中心线，距针孔上缘1.2-1.5mm（误差≤0.1mm）",
-      "若位置不对，松开旋梭固定螺丝，微调旋梭角度",
-      "调整后拧紧螺丝，手动转一圈确认无误",
-      "低速测试缝纫线迹是否正常，再逐步提高转速"
-    ],
-    "tips": "旋梭配合是缝纫机最核心的调试，出厂时已精确校准。非必要不要轻易松动旋梭固定螺丝，调整前先用记号笔做好原始位置标记。",
-    "tags": ["旋梭", "调试", "机械", "通用"]
-  },
-  {
-    "id": "zhengan_height",
-    "category": "机械调试",
-    "title": "针杆高度调整",
-    "brands": ["通用"],
-    "steps": [
-      "旋松针杆夹紧螺丝",
-      "标准高度：针杆下端至针板距离10.5-11.5mm",
-      "根据机型调整，薄料可偏低，厚料偏高",
-      "调整后旋紧针杆固定螺钉",
-      "确认机针在针板孔中心位置",
-      "手动转轮测试，确认机针不碰针板"
-    ],
-    "tags": ["针杆", "高度", "调试", "机械"]
-  },
-  {
-    "id": "songbu_adjust",
-    "category": "机械调试",
-    "title": "送布同步调整",
-    "brands": ["通用"],
-    "steps": [
-      "打开机壳后盖板，露出送布凸轮",
-      "旋松送布凸轮螺钉",
-      "按住送布凸轮，缓缓转动主动轮",
-      "标准同步：机针尖端到达针板面时，送布牙尖与针板面高低一致",
-      "对准标记：上轴油孔上端与送布凸轮基准孔下端一致时即达同步",
-      "拧紧送布凸轮螺钉"
-    ],
-    "tags": ["送布", "同步", "调试", "机械"]
-  },
-  {
-    "id": "mianxian_tension",
-    "category": "张力调节",
-    "title": "面线张力调节",
-    "brands": ["通用"],
-    "steps": [
-      "面线张力旋钮通常有1-9档数字",
-      "顺时针增加张力（线迹变紧），逆时针减小张力（线迹变松）",
-      "标准面料初始设定在4-5档",
-      "穿线后手动拉线感受阻力：需要稍微用力但不会卡顿或断裂",
-      "第一夹线器控制剪线后线头长度，调整为4-4.5cm最佳",
-      "挑线簧调节：薄料调弱，厚料调强"
-    ],
-    "check_method": "观察缝料正反面线迹：面线露面→面线太松或底线太紧；底线露面→底线太松或面线太紧。标准线迹应为两面线迹均衡，交织点位于布料中间。",
-    "tags": ["面线", "张力", "夹线器", "调节"]
-  },
-  {
-    "id": "dixian_tension",
-    "category": "张力调节",
-    "title": "底线张力调节",
-    "brands": ["通用"],
-    "steps": [
-      "底线通过梭壳上的小螺丝调节",
-      "将底线穿过梭壳，提起底线时梭壳应缓慢平稳下滑为佳",
-      "底线太松→顺时针旋紧梭壳小螺丝",
-      "底线太紧→逆时针旋松梭壳小螺丝",
-      "校准后用手拉底线确认阻力适中"
-    ],
-    "tips": "底线张力是很多人忽略的环节。维修时先问自己：梭芯绕线是否均匀？梭壳清理过没有？往往清理一下梭壳内的绒毛就能解决问题。",
-    "tags": ["底线", "张力", "梭壳", "调节"]
-  },
-  {
-    "id": "tension_coordination",
-    "category": "张力调节",
-    "title": "底面线配合（综合调整）",
-    "brands": ["通用"],
-    "symptoms": ["线迹不平衡", "底线起线圈", "面线起线圈"],
-    "steps": [
-      "先调底线：用梭壳小螺丝调至梭壳缓慢下滑即可",
-      "再调面线：从4-5档起步",
-      "用实际布料试缝10-15cm",
-      "观察正反面线迹：",
-      "  底面起线圈（底线露面）→ 调紧底线或调松面线",
-      "  正面起线圈（面线露面）→ 调紧面线或调松底线",
-      "  ✅ 正反线圈均衡 → 张力OK",
-      "缝料起皱 → 面底线张力同时降低",
-      "更换不同面料必须重新调整张力"
-    ],
-    "tags": ["面线", "底线", "张力", "配合", "综合"]
-  },
-  {
-    "id": "blackscreen",
-    "category": "电控系统维修",
-    "title": "显示屏黑屏/不亮",
-    "brands": ["通用"],
-    "symptoms": ["通电后面板不显示", "屏幕无反应"],
-    "steps": [
-      "检查电源线是否连接牢固",
-      "用万用表测电源输入电压是否正常",
-      "若电源正常，可能是主板或显示屏电路板故障",
-      "检查面板连接线是否松动或折断",
-      "若MT700主板黑屏/乱码，可能是芯片U8损坏需更换"
-    ],
-    "tags": ["黑屏", "显示屏", "电控", "电路板"]
-  },
-  {
-    "id": "cannot_boot",
-    "category": "电控系统维修",
-    "title": "无法开机/不通电",
-    "brands": ["通用"],
-    "symptoms": ["整机无反应", "指示灯不亮"],
-    "steps": [
-      "确认电源插座有电（用其他电器测试）",
-      "检查电源线是否完好",
-      "用万用表检测电源开关是否导通",
-      "检查保险丝是否熔断",
-      "以上均正常则可能是电路板故障，需送修或更换"
-    ],
-    "tags": ["无法开机", "不通电", "电控", "电路板"]
-  },
-  {
-    "id": "pedal_no_response",
-    "category": "电控系统维修",
-    "title": "踩踏板无反应",
-    "brands": ["通用"],
-    "symptoms": ["踏板踩下机器不运转"],
-    "steps": [
-      "检查踏板插头是否插紧",
-      "检查踏板连接线有无折断",
-      "测试踏板传感器是否正常",
-      "如MT2K-5型主板，需检查三极管Q1是否损坏",
-      "检查电控箱内对应接线端子"
-    ],
-    "tags": ["踏板", "无反应", "电控"]
-  },
-  {
-    "id": "electronic_maintenance",
-    "category": "电控系统维修",
-    "title": "电控系统通用排查指南",
-    "brands": ["通用"],
-    "steps": [
-      "【先断电重启】超过50%的电控问题重启后可恢复",
-      "【检查电源】用万用表确认输入电压稳定",
-      "【检查连接线】所有插头重新插拔一次",
-      "【清理灰尘】电控箱内部积灰可能导致短路",
-      "【代码定位】根据面板显示的故障代码针对性排查",
-      "【送修判断】以下情况建议送专业维修：",
-      "  ① 多处烧焦痕迹或异味",
-      "  ② 芯片明显烧毁",
-      "  ③ 自行更换电路板后故障依旧"
-    ],
-    "tools": ["万用表", "螺丝刀套装", "拔线钳", "电烙铁（备选）"],
-    "tags": ["电控", "通用排查", "电路板"]
-  },
-  {
-    "id": "daily_maintenance",
-    "category": "日常保养",
-    "title": "日常保养（每班次）",
-    "brands": ["通用"],
-    "steps": [
-      "【开机前】各加油孔滴入1-2滴专用缝纫机油",
-      "【开机前】检查机针有无弯曲，针尖是否完好",
-      "【开机前】清除机头表面污垢（用毛刷，不用尖锐物）",
-      "【缝纫中】每8小时加油保养一次",
-      "【下班前】打开针板盖，用毛刷清理梭床周围毛絮线头",
-      "【下班前】清理送布牙缝隙中的布屑",
-      "【加油后】空转2-3分钟使油液均匀分布"
-    ],
-    "interval": "每班次（8小时）",
-    "oil": "使用工业级缝纫机专用油，禁止使用普通机油",
-    "tags": ["保养", "日常", "润滑", "加油"]
-  },
-  {
-    "id": "weekly_maintenance",
-    "category": "日常保养",
-    "title": "每周/定期保养",
-    "brands": ["通用"],
-    "steps": [
-      "彻底清洁机头内部，包括针杆周围、挑线杆",
-      "检查旋梭间隙，确认小于0.05mm",
-      "检查各紧固螺丝有无松动",
-      "检查皮带磨损情况，必要时调整松紧度",
-      "用工业酒精清洁轨道区域，待挥发后重新上油",
-      "检查油窗油量，不足时补充"
-    ],
-    "interval": "每周或每50工作小时",
-    "tags": ["保养", "定期", "周保养"]
-  },
-  {
-    "id": "seasonal_maintenance",
-    "category": "日常保养",
-    "title": "换季/长期闲置保养",
-    "brands": ["通用"],
-    "steps": [
-      "长期闲置机器使用前必须重新润滑",
-      "换季时检查油品是否变质（缅甸高温环境需缩短换油周期）",
-      "检查各轴承有无异响",
-      "检查电控箱内部有无受潮或虫蛀（缅甸湿热环境重点注意）",
-      "开机后低速运转5分钟，确认一切正常再投入使用"
-    ],
-    "tags": ["保养", "换季", "闲置", "长期"]
-  },
-  {
-    "id": "lubrication_guide",
-    "category": "日常保养",
-    "title": "润滑操作指引",
-    "brands": ["通用"],
-    "steps": [
-      "【重点润滑部位】",
-      "① 针杆上下运动轨道",
-      "② 摆梭轨道",
-      "③ 送布牙连杆关节",
-      "④ 旋梭轴心",
-      "⑤ 挑线杆导轨",
-      "【操作规范】",
-      "1. 清洁各润滑点表面灰尘",
-      "2. 每个加油点滴1-2滴专用油",
-      "3. 空转2-3分钟使油液均匀分布",
-      "4. 用软布擦除多余油渍，防止滴在布料上"
-    ],
-    "tags": ["润滑", "加油", "保养", "专用油"]
-  },
-  {
-    "id": "jack_settings_pressure_foot",
-    "category": "功能设置",
-    "title": "杰克电脑缝纫机 抬压脚设置",
-    "brands": ["杰克", "JACK"],
-    "steps": [
-      "长按操作面板右下角功能设置键3秒进入二级菜单",
-      "用方向键切换至自动抬压脚选项",
-      "按压旋钮进入参数界面",
-      "数值范围0-5档，数值越大抬压脚高度越高",
-      "调整后按确认键保存退出"
-    ],
-    "tags": ["杰克", "JACK", "抬压脚", "设置"]
-  },
-  {
-    "id": "jack_settings_thread_trim",
-    "category": "功能设置",
-    "title": "杰克电脑缝纫机 剪线设置",
-    "brands": ["杰克", "JACK"],
-    "symptoms": ["剪线后线头太短", "剪线后线头太长", "不剪线"],
-    "steps": [
-      "按操作面板上剪刀标志的键为剪线功能",
-      "线头太短：调大第一夹线器张力（顺时针）",
-      "线头太长：调小第一夹线器张力（逆时针）",
-      "标准线头长度为4-4.5cm",
-      "不剪线时检查剪线电磁铁是否工作",
-      "检查动刀和定刀是否磨损"
-    ],
-    "tags": ["杰克", "JACK", "剪线", "设置"]
-  },
-  {
-    "id": "jack_settings_reverse",
-    "category": "功能设置",
-    "title": "杰克电脑缝纫机 倒缝/倒针设置",
-    "brands": ["杰克", "JACK"],
-    "steps": [
-      "面板上有两个'N'型图标用于倒缝/倒针",
-      "按一次执行一次倒缝",
-      "按住持续倒缝",
-      "倒针针数可在参数菜单中设置"
-    ],
-    "tags": ["杰克", "JACK", "倒缝", "倒针", "设置"]
-  },
-  {
-    "id": "overlock_skip_stitch",
-    "category": "包缝机/绷缝机",
-    "title": "包缝机（拷边机）跳针处理",
-    "brands": ["通用"],
-    "symptoms": ["包缝线迹不完整", "直针或弯针跳线"],
-    "steps": [
-      "检查直针是否弯曲或装反（直针平面靠右）",
-      "调整直针与弯针间隙",
-      "三线锁边机：重点调下弯针与直针的配合",
-      "五线包缝机：链条线跳针需单独调节链线弯针",
-      "检查穿线路径，包缝机穿线复杂容易出错"
-    ],
-    "tags": ["包缝机", "拷边机", "跳针", "锁边机"]
-  },
-  {
-    "id": "overlock_tension",
-    "category": "包缝机/绷缝机",
-    "title": "包缝机（拷边机）张力调节",
-    "brands": ["通用"],
-    "steps": [
-      "包缝机有多根线（3线/4线/5线），每根线都有独立的张力调节",
-      "先确认每根线的穿线路径正确",
-      "弯针线（下钩针线）张力通常最小",
-      "直针线张力中等",
-      "链线/装饰线张力根据布边效果微调",
-      "标准线迹：布边被线迹完全包覆，不松不紧"
-    ],
-    "tags": ["包缝机", "张力", "拷边机", "锁边机"]
-  },
-  {
-    "id": "interlock_repair",
-    "category": "包缝机/绷缝机",
-    "title": "绷缝机常见故障处理",
-    "brands": ["通用"],
-    "symptoms": ["线迹不美观", "跳针", "布料拉伸不均"],
-    "steps": [
-      "绷缝机跳针通常涉及多个弯针的相互配合",
-      "检查各弯针之间间隙是否均匀",
-      "检查弯针与直针的勾线时间",
-      "送布差异常会导致布料拉伸不均",
-      "差动送料比根据布料弹性调整",
-      "定期清理弯针周围的绒毛"
-    ],
-    "tags": ["绷缝机", "跳针", "差动"]
-  },
-  {
-    "id": "general_troubleshooting",
-    "category": "维修思路",
-    "title": "缝纫机故障排查通用思路",
-    "brands": ["通用"],
-    "steps": [
-      "【第一步：问】问操作工故障发生时的具体情况（突然发生还是逐渐出现）",
-      "【第二步：看】观察故障现象，听机器运转声音",
-      "【第三步：简】先排除最简单的可能（穿线、换针、清理）",
-      "【第四步：分】将复杂故障分解为机械/电气/操作三方面",
-      "【第五步：换】替换法排查——换针、换线、换梭壳",
-      "【第六步：调】调整配合参数（旋梭时间、针杆高度、张力）"
-    ],
-    "tips": "维修不要一上来就拆大件。70%的故障可以通过清理、换针、重新穿线解决。",
-    "tags": ["维修思路", "通用", "排查方法"]
-  },
-  {
-    "id": "tool_list",
-    "category": "维修工具",
-    "title": "维修必备工具清单",
-    "brands": ["通用"],
-    "items": [
-      "螺丝刀套装（十字/一字，大中小号）",
-      "内六角扳手套装（公制）",
-      "万用表（测电压、通断）",
-      "镊子（清理线头绒毛）",
-      "毛刷（清洁用，不能太硬）",
-      "缝纫机专用油",
-      "工业酒精（清洁轨道）",
-      "放大镜（检查旋梭尖磨损）",
-      "油石或细砂纸（修磨送布牙、去毛刺）",
-      "备用机针（各型号）",
-      "备用旋梭",
-      "备用梭芯/梭壳",
-      "记号笔（拆卸前做标记）"
-    ],
-    "tags": ["工具", "维修工具", "清单"]
-  },
-  {
-    "id": "myanmar_environment",
-    "category": "当地经验",
-    "title": "缅甸当地维修注意事项",
-    "brands": ["通用"],
-    "steps": [
-      "【潮湿环境】缅甸仰光属热带季风气候，潮湿多雨：",
-      "  ① 电控箱内放置干燥剂，定期更换",
-      "  ② 机器不使用时用布罩覆盖",
-      "  ③ 每周至少通电运转一次，防止电路受潮",
-      "【电压问题】当地电网电压可能不稳定：",
-      "  ① 建议加装稳压器",
-      "  ② 电脑缝纫机必须有稳定电源",
-      "  ③ 雷雨季节拔掉电源插头",
-      "【配件供应】缅甸配件采购不易：",
-      "  ① 常用易损件（机针、旋梭、皮带）提前备货",
-      "  ② 从国内采购配件周期约7-15天",
-      "  ③ 与杰克、美机驻缅代理保持联系",
-      "【语言】中国品牌电控面板多为中文或英文：",
-      "  ① 建议整理常用代码说明给缅甸工人",
-      "  ② 拍照标注英文操作说明贴在机器旁"
-    ],
-    "tags": ["缅甸", "当地经验", "潮湿", "电压", "热带"]
-  }
-];
-let allData = [];
+function switchLang(lang) {
+  document.body.classList.remove('lang-zh', 'lang-my');
+  document.body.classList.add('lang-' + lang);
+  document.getElementById('langZh').classList.toggle('active', lang === 'zh');
+  document.getElementById('langMy').classList.toggle('active', lang === 'my');
+  localStorage.setItem('siteLang', lang);
 
-function highlightText(text, query) {
-  if (!query || !text) return text;
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`(${escaped})`, 'gi');
-  return String(text).replace(regex, '<span class="highlight">$1</span>');
+  /* In Burmese mode, hide hero secondary my line since it's shown inline */
+  const heroMy = document.querySelector('.hero .my');
+  if (heroMy) heroMy.style.display = lang === 'my' ? 'block' : 'none';
 }
 
-function flatText(item) {
-  const parts = [item.title, item.category, ...(item.brands || []), ...(item.tags || []), ...(item.symptoms || []), ...(item.causes || [])];
-  if (item.steps) parts.push(...item.steps);
-  if (item.items && Array.isArray(item.items)) {
-    item.items.forEach(i => { parts.push(i.code || '', i.meaning || '', i.solution || ''); });
-  }
-  if (item.tips) parts.push(item.tips);
-  return parts.join(' ').toLowerCase();
+function toggleMobile() {
+  document.getElementById('navLinks').classList.toggle('open');
 }
 
-function getCategories() {
-  const cats = [...new Set(allData.map(d => d.category))];
-  return ['全部', ...cats.sort()];
-}
-
-function getBrands() {
-  const brands = new Set();
-  allData.forEach(d => (d.brands || []).forEach(b => brands.add(b)));
-  return ['全部品牌', ...[...brands].sort()];
-}
-
-function renderCards(items, query) {
-  if (!items.length) {
-    return '<div class="empty-state"><div class="big-icon">&#128270;</div><p>没有找到匹配的结果，试试其他关键词</p></div>';
-  }
-  return items.map(item => {
-    const title = query ? highlightText(item.title, query) : item.title;
-    const symptoms = item.symptoms ? item.symptoms.map(s => `<li>${query ? highlightText(s, query) : s}</li>`).join('') : '';
-    const causes = item.causes ? item.causes.map(c => `<li>${query ? highlightText(c, query) : c}</li>`).join('') : '';
-    const steps = item.steps ? item.steps.map(s => `<li>${query ? highlightText(s, query) : s}</li>`).join('') : '';
-
-    let codeTable = '';
-    if (item.items && Array.isArray(item.items)) {
-      const headers = Object.keys(item.items[0]);
-      codeTable = `<table class="code-table"><thead><tr>${headers.map(h => {
-        const labels = { code: '代码', meaning: '含义', solution: '解决方法', fault: '故障', causes: '原因' };
-        return `<th>${labels[h] || h}</th>`;
-      }).join('')}</tr></thead><tbody>${item.items.map(row => {
-        return `<tr>${headers.map(h => {
-          let val = row[h];
-          if (Array.isArray(val)) val = val.join('；');
-          return `<td>${query ? highlightText(val || '', query) : (val || '')}</td>`;
-        }).join('')}</tr>`;
-      }).join('')}</tbody></table>`;
-    }
-
-    const tipsHtml = item.tips ? `<div class="tips-box"><span class="label">提示：</span>${query ? highlightText(item.tips, query) : item.tips}</div>` : '';
-
-    const brandsHtml = (item.brands || []).map(b => `<span class="meta-tag brand">${query ? highlightText(b, query) : b}</span>`).join('');
-
-    return `<div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <h2>${title}</h2>
-        <span class="expand-icon">&#9660;</span>
-      </div>
-      <div class="card-body">
-        <div class="meta-row">
-          <span class="meta-tag">${item.category}</span>
-          ${brandsHtml}
-        </div>
-        ${item.symptoms ? `<div class="section-title">现象</div><ul class="symptom-list">${symptoms}</ul>` : ''}
-        ${item.causes ? `<div class="section-title">原因</div><ul class="cause-list">${causes}</ul>` : ''}
-        ${item.steps ? `<div class="section-title">维修步骤</div><ol class="step-list">${steps}</ol>` : ''}
-        ${codeTable}
-        ${tipsHtml}
-        ${item.check_method ? `<div class="tips-box" style="background:#eff6ff;border-left-color:var(--primary);margin-top:12px;"><strong>判断方法：</strong>${query ? highlightText(item.check_method, query) : item.check_method}</div>` : ''}
-        ${item.interval ? `<div style="margin-top:8px;font-size:13px;color:var(--text-secondary);">周期：${item.interval}</div>` : ''}
-        ${item.oil ? `<div style="margin-top:4px;font-size:13px;color:var(--text-secondary);">润滑油：${item.oil}</div>` : ''}
-        ${item.tools ? `<div style="margin-top:8px;font-size:13px;color:var(--text-secondary);">所需工具：${item.tools.join('、')}</div>` : ''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterData(category, brand, query) {
-  return allData.filter(item => {
-    if (category !== '全部' && item.category !== category) return false;
-    if (brand !== '全部品牌' && !(item.brands || []).includes(brand)) return false;
-    if (query) {
-      const q = query.toLowerCase();
-      return flatText(item).includes(q);
-    }
-    return true;
-  });
-}
-
-function updateUI() {
-  const category = document.querySelector('#categoryFilters .active')?.dataset?.cat || '全部';
-  const brand = document.querySelector('#brandFilters .active')?.dataset?.brand || '全部品牌';
-  const query = document.getElementById('searchInput').value.trim();
-  const filtered = filterData(category, brand, query);
-  document.getElementById('totalCount').textContent = allData.length;
-  document.getElementById('results').innerHTML = renderCards(filtered, query);
-  document.getElementById('clearBtn').classList.toggle('show', query.length > 0);
-}
-
-function toggleCard(el) {
-  el.closest('.card').classList.toggle('open');
-}
-
-function buildFilters() {
-  const catContainer = document.getElementById('categoryFilters');
-  const cats = getCategories();
-  catContainer.innerHTML = cats.map((c, i) =>
-    `<button class="filter-btn${i === 0 ? ' active' : ''}" data-cat="${c}" onclick="setCategory(this)">${c}</button>`
-  ).join('');
-
-  const brandContainer = document.getElementById('brandFilters');
-  const brands = getBrands();
-  brandContainer.innerHTML = brands.map((b, i) =>
-    `<button class="brand-btn${i === 0 ? ' active' : ''}" data-brand="${b}" onclick="setBrand(this)">${b}</button>`
-  ).join('');
-}
-
-function setCategory(el) {
-  document.querySelectorAll('#categoryFilters .active').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  updateUI();
-}
-
-function setBrand(el) {
-  document.querySelectorAll('#brandFilters .active').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  updateUI();
-}
-
-let searchTimer;
-document.getElementById('searchInput').addEventListener('input', function() {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(updateUI, 200);
+/* Navbar scroll effect */
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-document.getElementById('clearBtn').addEventListener('click', function() {
-  document.getElementById('searchInput').value = '';
-  updateUI();
-});
+/* Load saved language */
+(function() {
+  const saved = localStorage.getItem('siteLang') || 'zh';
+  switchLang(saved);
+  /* Ensure correct initial display of hero my element */
+  const heroMy = document.querySelector('.hero .my');
+  if (heroMy) heroMy.style.display = saved === 'my' ? 'block' : 'none';
+})();
 
-// Data loaded from embedded data below
-allData = embeddedData;
-document.getElementById('loading').style.display = 'none';
-buildFilters();
-updateUI();
+/* Close mobile nav on link click */
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
 </script>
 
 </body>
